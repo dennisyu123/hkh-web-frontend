@@ -1,0 +1,17 @@
+{
+  "common": {
+    "brandName": "HK Health Innovations Ltd.",
+    "tagline": "Healthcare innovation for Hong Kong"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "roadmap": "Roadmap",
+    "language": "Language",
+    "langEnglish": "English",
+    "langZhHK": "Traditional Chinese",
+    "langZhCN": "Simplified Chinese",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  }
+}
