@@ -1,5 +1,11 @@
 export type ProductCategory = 'remote-care' | 'analytics' | 'patient-engagement';
 
+export const productCategories: ProductCategory[] = [
+  'remote-care',
+  'analytics',
+  'patient-engagement'
+];
+
 export type Product = {
   id: string;
   name: string;
