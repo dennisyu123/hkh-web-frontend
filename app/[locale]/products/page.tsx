@@ -1,3 +1,5 @@
+"use client";
+
 import Link from 'next/link';
 
 import ProductCard from '../../../components/ProductCard';
@@ -55,17 +57,17 @@ type CategoryKey = keyof typeof labels.en.categories;
 
 const categoryOptions: CategoryKey[] = ['all', 'remote-care', 'analytics', 'patient-engagement'];
 
-export default async function ProductsPage({
+export default function ProductsPage({
   params,
   searchParams
 }: {
-  params: Promise<{ locale: string }>;
-  searchParams?: Promise<{ category?: string }>;
+  params: { locale: string };
+  searchParams?: { category?: string };
 }) {
-  const { locale } = await params;
+  const { locale } = params;
   const resolvedLocale = (labels[locale as PageLocale] ? locale : defaultLocale) as PageLocale;
   const content = labels[resolvedLocale];
-  const { category } = (await searchParams) ?? {};
+  const { category } = searchParams ?? {};
   const activeCategory = (categoryOptions.includes(category as CategoryKey)
     ? (category as CategoryKey)
     : 'all') as CategoryKey;
