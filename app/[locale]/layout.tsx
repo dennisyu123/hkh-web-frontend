@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 
 import Navigation from '../../components/Navigation';
+import { Suspense } from 'react';
 import { locales, type Locale } from '../../i18n';
 
 export async function generateStaticParams() {
@@ -27,7 +28,9 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <Navigation />
+      <Suspense fallback={<div />}>
+        <Navigation />
+      </Suspense>
       {children}
     </NextIntlClientProvider>
   );
