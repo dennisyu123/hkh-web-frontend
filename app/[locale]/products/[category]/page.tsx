@@ -1,11 +1,10 @@
 import Link from 'next/link';
-import { Suspense } from 'react';
+import { notFound } from 'next/navigation';
 
-import ProductCard from '../../../components/ProductCard';
-import ProductsCategoryRedirect from '../../../components/ProductsCategoryRedirect';
-import SEO from '../../../components/SEO';
-import { products, productCategories } from '../../../lib/data/products';
-import { defaultLocale } from '../../../i18n';
+import ProductCard from '../../../../components/ProductCard';
+import SEO from '../../../../components/SEO';
+import { productCategories, products } from '../../../../lib/data/products';
+import { defaultLocale, locales } from '../../../../i18n';
 
 const labels = {
   en: {
@@ -57,36 +56,37 @@ type CategoryKey = keyof typeof labels.en.categories;
 
 const categoryOptions: CategoryKey[] = ['all', ...productCategories];
 
-export default async function ProductsPage({
-  params,
+export async function generateStaticParams() {
+  return locales.flatMap((locale) =>
+    productCategories.map((category) => ({ locale, category }))
+  );
+}
+
+export default async function ProductsCategoryPage({
+  params
 }: {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: string; category: string }>;
 }) {
-  const { locale } = await params;
+  const { locale, category } = await params;
+
+  if (!productCategories.includes(category as (typeof productCategories)[number])) {
+    notFound();
+  }
+
   const resolvedLocale = (labels[locale as PageLocale] ? locale : defaultLocale) as PageLocale;
   const content = labels[resolvedLocale];
+  const activeCategory = category as CategoryKey;
 
-  const activeCategory = 'all' as CategoryKey;
-
-  const filteredProducts =
-    activeCategory === 'all'
-      ? products
-      : products.filter((product) => product.category === activeCategory);
+  const filteredProducts = products.filter((product) => product.category === activeCategory);
 
   return (
     <main className="flex flex-1 flex-col gap-10 px-6 py-12 sm:px-10">
-      <Suspense fallback={null}>
-        <ProductsCategoryRedirect
-          locale={resolvedLocale}
-          categories={productCategories}
-        />
-      </Suspense>
       <SEO
         title={content.title}
         description={content.description}
         locale={resolvedLocale}
         type="ItemList"
-        canonicalPath="/products"
+        canonicalPath={`/products/${activeCategory}`}
       />
 
       <header className="mx-auto w-full max-w-5xl space-y-3 text-center">
