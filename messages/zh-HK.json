@@ -1,0 +1,17 @@
+{
+  "common": {
+    "brandName": "香港健康創新有限公司",
+    "tagline": "為香港打造的醫療創新"
+  },
+  "nav": {
+    "home": "首頁",
+    "products": "產品",
+    "roadmap": "路線圖",
+    "language": "語言",
+    "langEnglish": "English",
+    "langZhHK": "繁體中文",
+    "langZhCN": "簡體中文",
+    "openMenu": "開啟選單",
+    "closeMenu": "關閉選單"
+  }
+}
