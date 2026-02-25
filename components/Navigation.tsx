@@ -45,7 +45,8 @@ export default function Navigation() {
     () => [
       { key: 'home', href: `/${locale}` },
       { key: 'products', href: `/${locale}/products` },
-      { key: 'roadmap', href: `/${locale}/roadmap` }
+      { key: 'roadmap', href: `/${locale}/roadmap` },
+      { key: 'contact', href: `/${locale}/contact` }
     ],
     [locale]
   );
