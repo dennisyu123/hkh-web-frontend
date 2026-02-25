@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
-
+import { setLocaleCookieClient } from '../utils/cookies';
 import { locales, type Locale } from '../i18n';
 
 const localeLabels: Record<Locale, { key: string }> = {
@@ -62,7 +62,7 @@ export default function Navigation() {
   });
 
   const handleLocaleChange = (targetLocale: Locale) => {
-    document.cookie = `NEXT_LOCALE=${targetLocale};path=/;max-age=31536000`;
+    setLocaleCookieClient(targetLocale);
   };
 
   return (
