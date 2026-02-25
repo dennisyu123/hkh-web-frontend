@@ -10,7 +10,7 @@ type SEOProps = {
   canonicalPath: string;
 };
 
-const baseUrl = 'https://yourhealthbrand.hk';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://yourhealthbrand.hk';
 
 const localizedHrefLang = [
   { locale: 'en', hrefLang: 'en-HK' },

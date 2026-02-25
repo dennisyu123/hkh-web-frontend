@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import ProductCard from '../../../components/ProductCard';
 import ProductsCategoryRedirect from '../../../components/ProductsCategoryRedirect';
 import SEO from '../../../components/SEO';
-import { products, productCategories } from '../../../lib/data/products';
+import { getProducts, productCategories } from '../../../lib/data/products';
 import { defaultLocale } from '../../../i18n';
 
 const labels = {
@@ -67,6 +67,7 @@ export default async function ProductsPage({
   const content = labels[resolvedLocale];
 
   const activeCategory = 'all' as CategoryKey;
+  const products = getProducts(resolvedLocale);
 
   const filteredProducts =
     activeCategory === 'all'

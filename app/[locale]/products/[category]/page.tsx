@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 
 import ProductCard from '../../../../components/ProductCard';
 import SEO from '../../../../components/SEO';
-import { productCategories, products } from '../../../../lib/data/products';
+import { getProducts, productCategories } from '../../../../lib/data/products';
 import { defaultLocale, locales } from '../../../../i18n';
 
 const labels = {
@@ -76,7 +76,7 @@ export default async function ProductsCategoryPage({
   const resolvedLocale = (labels[locale as PageLocale] ? locale : defaultLocale) as PageLocale;
   const content = labels[resolvedLocale];
   const activeCategory = category as CategoryKey;
-
+  const products = getProducts(resolvedLocale);
   const filteredProducts = products.filter((product) => product.category === activeCategory);
 
   return (
